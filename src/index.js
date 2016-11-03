@@ -19,34 +19,34 @@ try {
  * @public
  */
 
-module.exports = useNative ? NativeProgressEvent :
-
-// IE >= 9
-    'function' === typeof document.createEvent ? function ProgressEvent (type, props) {
-        var e = document.createEvent('Event');
-        e.initEvent(type, false, false);
-        if (props) {
-            e.lengthComputable = Boolean(props.lengthComputable);
-            e.loaded = Number(props.loaded) || 0;
-            e.total = Number(props.total) || 0;
-        } else {
-            e.lengthComputable = false;
-            e.loaded = e.total = 0;
-        }
-        return e;
-    } :
+if(!useNative){
+    global.ProgressEvent = // IE >= 9
+        'function' === typeof document.createEvent ? function (type, props) {
+            var e = document.createEvent('Event');
+            e.initEvent(type, false, false);
+            if (props) {
+                e.lengthComputable = Boolean(props.lengthComputable);
+                e.loaded = Number(props.loaded) || 0;
+                e.total = Number(props.total) || 0;
+            } else {
+                e.lengthComputable = false;
+                e.loaded = e.total = 0;
+            }
+            return e;
+        } :
 
 // IE <= 8
-    function ProgressEvent (type, props) {
-        var e = document.createEventObject();
-        e.type = type;
-        if (props) {
-            e.lengthComputable = Boolean(props.lengthComputable);
-            e.loaded = Number(props.loaded) || 0;
-            e.total = Number(props.total) || 0;
-        } else {
-            e.lengthComputable = false;
-            e.loaded = e.total = 0;
-        }
-        return e;
-    };
+        function (type, props) {
+            var e = document.createEventObject();
+            e.type = type;
+            if (props) {
+                e.lengthComputable = Boolean(props.lengthComputable);
+                e.loaded = Number(props.loaded) || 0;
+                e.total = Number(props.total) || 0;
+            } else {
+                e.lengthComputable = false;
+                e.loaded = e.total = 0;
+            }
+            return e;
+        };
+}

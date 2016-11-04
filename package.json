@@ -1,6 +1,6 @@
 {
   "name": "progress-event-polyfill",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A polyfill for ProgressEvent",
   "main": "lib/progress-event-polyfill.js",
   "scripts": {

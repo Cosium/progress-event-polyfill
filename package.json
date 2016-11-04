@@ -2,7 +2,7 @@
   "name": "progress-event-polyfill",
   "version": "1.0.1",
   "description": "A polyfill for ProgressEvent",
-  "main": "index.js",
+  "main": "lib/progress-event-polyfill.js",
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev",
